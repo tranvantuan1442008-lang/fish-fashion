@@ -18,13 +18,13 @@ export default function Header() {
 
   return (
     <header className="border-b bg-sky-500 text-white">
-      <div className="max-w-7xl mx-auto flex items-center px-4 py-4">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-4 px-4 py-4">
 
-        <h1 className="text-3xl font-bold mr-10">
+        <h1 className="text-2xl md:text-3xl font-bold md:mr-10">
           🐟 FISH
         </h1>
 
-        <nav className="flex gap-6">
+        <nav className="flex flex-wrap justify-center gap-4 md:gap-6">
           <Link href="/">Nam</Link>
           <Link href="/">Nữ</Link>
           <Link href="/">Áo</Link>
@@ -32,17 +32,27 @@ export default function Header() {
           <Link href="/contact">Liên hệ</Link>
         </nav>
 
-        <div className="flex items-center gap-4 ml-auto">
+        <div className="flex items-center gap-3 md:ml-auto flex-wrap">
 
           <input
             type="text"
             placeholder="Tìm sản phẩm..."
-            className="border rounded-lg px-3 py-1 text-black"
+            className="border rounded-lg px-3 py-2 text-black w-32 md:w-64"
           />
 
-          <button className="text-2xl">
-            🛒
-          </button>
+          <Link
+  href="/cart"
+  className="
+    bg-white
+    text-sky-600
+    px-3
+    py-2
+    rounded-lg
+    font-bold
+  "
+>
+  🛒
+</Link>
 
           {!isLogin ? (
             <Link
@@ -107,7 +117,9 @@ export default function Header() {
                   <Link href="/orders" className="block py-2 hover:text-sky-600">
                     📦 Quản lý đơn hàng
                   </Link>
-
+<Link href="/cart" className="block py-2 hover:text-sky-600">
+  🛒 Giỏ hàng của tôi
+</Link>
                   <Link href="/returns" className="block py-2 hover:text-sky-600">
                     🔄 Quản lý đổi trả
                   </Link>
