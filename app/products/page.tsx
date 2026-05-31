@@ -26,7 +26,7 @@ export default function ProductsPage() {
                 selectedProduct === "ao-nam" ? "" : "ao-nam"
               )
             }
-            className="relative border rounded-xl p-2 w-56 bg-white shadow-md overflow-hidden cursor-pointer"
+            className="relative border rounded-xl p-2 w-full bg-white shadow-md overflow-hidden cursor-pointer"
           >
             <img
               src="/nam1.jpg"
@@ -64,7 +64,7 @@ export default function ProductsPage() {
                 selectedProduct === "quan-nam" ? "" : "quan-nam"
               )
             }
-            className="relative border rounded-xl p-2 w-56 bg-white shadow-md overflow-hidden cursor-pointer"
+            className="relative border rounded-xl p-2 w-full bg-white shadow-md overflow-hidden cursor-pointer"
           >
             <img
               src="/nam2.jpg"
@@ -103,7 +103,7 @@ export default function ProductsPage() {
           👩 Thời trang Nữ
         </h2>
 
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4">
 
           <div
             onClick={() =>
@@ -111,7 +111,7 @@ export default function ProductsPage() {
                 selectedProduct === "vay-nu" ? "" : "vay-nu"
               )
             }
-            className="relative border rounded-xl p-2 w-56 bg-white shadow-md overflow-hidden cursor-pointer"
+            className="relative border rounded-xl p-2 w-full bg-white shadow-md overflow-hidden cursor-pointer"
           >
             <img
               src="/nu1.jpg"
@@ -149,7 +149,7 @@ export default function ProductsPage() {
                 selectedProduct === "ao-nu" ? "" : "ao-nu"
               )
             }
-            className="relative border rounded-xl p-2 w-56 bg-white shadow-md overflow-hidden cursor-pointer"
+            className="relative border rounded-xl p-2 w-full bg-white shadow-md overflow-hidden cursor-pointer"
           >
             <img
               src="/nu2.jpg"
