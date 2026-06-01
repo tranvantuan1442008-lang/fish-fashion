@@ -1,12 +1,23 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function CheckoutPage() {
   const [province, setProvince] = useState("");
   const [district, setDistrict] = useState("");
   const [ward, setWard] = useState("");
 
+const [provinces, setProvinces] = useState<any[]>([]);
+const [districts, setDistricts] = useState<any[]>([]);
+const [wards, setWards] = useState<any[]>([]);
+
+useEffect(() => {
+  fetch("https://provinces.open-api.vn/api/?depth=3")
+    .then((res) => res.json())
+    .then((data) => {
+      setProvinces(data);
+    });
+}, []);
   return (
     <div className="min-h-screen p-8 max-w-4xl mx-auto">
       <h1 className="text-4xl font-bold mb-8">
@@ -28,38 +39,97 @@ export default function CheckoutPage() {
         />
 
         <select
-          value={province}
-          onChange={(e) => setProvince(e.target.value)}
-          className="w-full border p-3 rounded-lg"
-        >
-          <option value="">Chọn tỉnh</option>
-          <option value="bacgiang">Bắc Giang</option>
-          <option value="hanoi">Hà Nội</option>
-        </select>
+  value={province}
+  onChange={(e) => {
+    const code = e.target.value;
 
-        {province && (
-          <select
-            value={district}
-            onChange={(e) => setDistrict(e.target.value)}
-            className="w-full border p-3 rounded-lg"
-          >
-            <option value="">Chọn huyện</option>
-            <option value="yendung">Yên Dũng</option>
-            <option value="langgiang">Lạng Giang</option>
-          </select>
-        )}
+    setProvince(code);
+    setDistrict("");
+    setWard("");
+
+    const selectedProvince = provinces.find(
+      (p) => p.code.toString() === code
+    );
+
+    setDistricts(
+      selectedProvince?.districts || []
+    );
+
+    setWards([]);
+  }}
+  className="w-full border p-3 rounded-lg"
+>
+  <option value="">
+    Chọn tỉnh / thành phố
+  </option>
+
+  {provinces.map((p) => (
+    <option
+      key={p.code}
+      value={p.code}
+    >
+      {p.name}
+    </option>
+  ))}
+  </select>
+{province && (
+  <select
+    value={district}
+    onChange={(e) => {
+      const code = e.target.value;
+
+      setDistrict(code);
+      setWard("");
+
+      const selectedDistrict =
+        districts.find(
+          (d) => d.code.toString() === code
+        );
+
+      setWards(
+        selectedDistrict?.wards || []
+      );
+    }}
+    className="w-full border p-3 rounded-lg"
+  >
+    <option value="">
+      Chọn quận / huyện
+    </option>
+
+    {districts.map((d) => (
+      <option
+        key={d.code}
+        value={d.code}
+      >
+        {d.name}
+      </option>
+    ))}
+  </select>
+)}
+        
 
         {district && (
-          <select
-            value={ward}
-            onChange={(e) => setWard(e.target.value)}
-            className="w-full border p-3 rounded-lg"
-          >
-            <option value="">Chọn xã</option>
-            <option value="noihoang">Nội Hoàng</option>
-            <option value="tienphong">Tiền Phong</option>
-          </select>
-        )}
+  <select
+    value={ward}
+    onChange={(e) =>
+      setWard(e.target.value)
+    }
+    className="w-full border p-3 rounded-lg"
+  >
+    <option value="">
+      Chọn xã / phường
+    </option>
+
+    {wards.map((w) => (
+      <option
+        key={w.code}
+        value={w.code}
+      >
+        {w.name}
+      </option>
+    ))}
+  </select>
+)}
 
         {ward && (
           <input
