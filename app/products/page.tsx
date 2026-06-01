@@ -57,11 +57,20 @@ const [message, setMessage] = useState("");
       localStorage.getItem("cart") || "[]"
     );
 
-    cart.push({
-  name: "Áo thun nam",
-  price: 199000,
-  quantity: 1,
-});
+    const existingItem = cart.find(
+  (item: any) => item.name === "Áo thun nam"
+);
+
+if (existingItem) {
+  existingItem.quantity =
+    (existingItem.quantity || 1) + 1;
+} else {
+  cart.push({
+    name: "Áo thun nam",
+    price: 199000,
+    quantity: 1,
+  });
+}
 
     localStorage.setItem(
       "cart",
