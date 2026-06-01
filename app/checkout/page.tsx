@@ -6,7 +6,11 @@ export default function CheckoutPage() {
   const [province, setProvince] = useState("");
   const [district, setDistrict] = useState("");
   const [ward, setWard] = useState("");
+const [name, setName] = useState("");
+const [phone, setPhone] = useState("");
+const [addressDetail, setAddressDetail] = useState("");
 
+const [success, setSuccess] = useState(false);
 const [provinces, setProvinces] = useState<any[]>([]);
 const [districts, setDistricts] = useState<any[]>([]);
 const [wards, setWards] = useState<any[]>([]);
@@ -19,6 +23,20 @@ useEffect(() => {
     });
 }, []);
 const handleOrder = async () => {
+    if (!name.trim()) {
+  alert("⚠️ Vui lòng nhập họ tên");
+  return;
+}
+
+if (!phone.trim()) {
+  alert("⚠️ Vui lòng nhập số điện thoại");
+  return;
+}
+
+if (!addressDetail.trim()) {
+  alert("⚠️ Vui lòng nhập số nhà / thôn / xóm");
+  return;
+}
   const cart = JSON.parse(
     localStorage.getItem("cart") || "[]"
   );
@@ -37,19 +55,30 @@ const handleOrder = async () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: "Khách hàng",
-        phone: "0123456789",
-        address: "Địa chỉ test",
-        products: cart,
-        total,
-      }),
+  name,
+  phone,
+  address:
+    addressDetail +
+    ", " +
+    ward +
+    ", " +
+    district +
+    ", " +
+    province,
+  products: cart,
+  total,
+}),
     }
   );
 
   const data = await res.json();
-
+console.log(data);
   if (data.success) {
-    alert("🎉 Đặt hàng thành công");
+    setSuccess(true);
+
+setTimeout(() => {
+  setSuccess(false);
+}, 3000);
 
     localStorage.removeItem("cart");
 
@@ -67,17 +96,20 @@ const handleOrder = async () => {
       <div className="space-y-4">
 
         <input
-          type="text"
-          placeholder="Họ và tên"
-          className="w-full border p-3 rounded-lg"
-        />
+  type="text"
+  value={name}
+  onChange={(e) => setName(e.target.value)}
+  placeholder="Họ và tên"
+  className="w-full border p-3 rounded-lg"
+/>
 
         <input
-          type="text"
-          placeholder="Số điện thoại"
-          className="w-full border p-3 rounded-lg"
-        />
-
+  type="text"
+  value={phone}
+  onChange={(e) => setPhone(e.target.value)}
+  placeholder="Số điện thoại"
+  className="w-full border p-3 rounded-lg"
+/>
         <select
   value={province}
   onChange={(e) => {
@@ -173,10 +205,14 @@ const handleOrder = async () => {
 
         {ward && (
           <input
-            type="text"
-            placeholder="Số nhà / thôn / xóm"
-            className="w-full border p-3 rounded-lg"
-          />
+  type="text"
+  value={addressDetail}
+  onChange={(e) =>
+    setAddressDetail(e.target.value)
+  }
+  placeholder="Số nhà / thôn / xóm"
+  className="w-full border p-3 rounded-lg"
+/>
         )}
 
         {ward && (
@@ -194,8 +230,31 @@ const handleOrder = async () => {
   Xác nhận đặt hàng
 </button>
         )}
+    
 
-      </div>
+      {success && (
+        <div
+          className="
+            fixed
+            top-5
+            right-5
+            bg-green-500
+            text-white
+            px-6
+            py-4
+            rounded-xl
+            shadow-xl
+            z-50
+          "
+        >
+          ✅ Đặt hàng thành công
+        </div>
+      )}
+
     </div>
+  
+
+       </div>
+
   );
 }
