@@ -24,6 +24,9 @@ export default function CartPage() {
       "cart",
       JSON.stringify(newCart)
     );
+    window.dispatchEvent(
+  new Event("cartUpdated")
+);
   };
 const increaseQuantity = (index: number) => {
   const newCart = [...cart];
@@ -37,6 +40,9 @@ const increaseQuantity = (index: number) => {
     "cart",
     JSON.stringify(newCart)
   );
+  window.dispatchEvent(
+  new Event("cartUpdated")
+);
 };
 
 const decreaseQuantity = (index: number) => {
@@ -51,6 +57,9 @@ const decreaseQuantity = (index: number) => {
       "cart",
       JSON.stringify(newCart)
     );
+    window.dispatchEvent(
+  new Event("cartUpdated")
+); 
   }
 };
   const total = cart.reduce(

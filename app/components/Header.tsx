@@ -31,10 +31,18 @@ setCartCount(cart.length);
     checkLogin();
 
     window.addEventListener("focus", checkLogin);
-
+window.addEventListener(
+  "cartUpdated",
+  checkLogin
+);
     return () => {
       window.removeEventListener("focus", checkLogin);
+         window.addEventListener(
+  "cartUpdated",
+  checkLogin
+);
     };
+ 
   }, []);
 
   return (
