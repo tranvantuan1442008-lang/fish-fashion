@@ -133,9 +133,30 @@ export default function ProductsPage() {
                   Thiết kế nữ tính, phù hợp đi chơi và dự tiệc.
                 </p>
 
-                <button className="bg-sky-500 py-2 rounded-lg mb-2">
-                  🛒 Thêm vào giỏ hàng
-                </button>
+                <button
+  onClick={(e) => {
+    e.stopPropagation();
+
+    const cart = JSON.parse(
+      localStorage.getItem("cart") || "[]"
+    );
+
+    cart.push({
+      name: "Áo thun nam",
+      price: 199000,
+    });
+
+    localStorage.setItem(
+      "cart",
+      JSON.stringify(cart)
+    );
+
+    alert("Đã thêm vào giỏ hàng");
+  }}
+  className="bg-sky-500 py-2 rounded-lg mb-2"
+>
+  🛒 Thêm vào giỏ hàng
+</button>
 
                 <button className="bg-red-500 py-2 rounded-lg">
                   ⚡ Mua ngay
