@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from "next/link";
@@ -9,11 +10,26 @@ export default function Header() {
   const [showProfile, setShowProfile] = useState(false);
 
   useEffect(() => {
-    const login = localStorage.getItem("isLogin");
-    const email = localStorage.getItem("userEmail");
+    const checkLogin = () => {
+      const login = localStorage.getItem("isLogin");
+      const email = localStorage.getItem("userEmail");
 
-    setIsLogin(login === "true" && !!email);
-    setUserEmail(email || "");
+      if (login === "true" && email) {
+        setIsLogin(true);
+        setUserEmail(email);
+      } else {
+        setIsLogin(false);
+        setUserEmail("");
+      }
+    };
+
+    checkLogin();
+
+    window.addEventListener("focus", checkLogin);
+
+    return () => {
+      window.removeEventListener("focus", checkLogin);
+    };
   }, []);
 
   return (
