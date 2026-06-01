@@ -4,6 +4,8 @@ import { useState } from "react";
 
 export default function ProductsPage() {
   const [selectedProduct, setSelectedProduct] = useState("");
+const [showToast, setShowToast] = useState(false);
+const [message, setMessage] = useState("");
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-sky-100 to-white">
@@ -65,7 +67,12 @@ export default function ProductsPage() {
       JSON.stringify(cart)
     );
 
-    alert("Đã thêm vào giỏ hàng");
+    setMessage("🛒 Đã thêm vào giỏ hàng");
+    setShowToast(true);
+
+    setTimeout(() => {
+      setShowToast(false);
+    }, 2000);
   }}
   className="bg-sky-500 py-2 rounded-lg mb-2"
 >
@@ -124,13 +131,17 @@ export default function ProductsPage() {
       JSON.stringify(cart)
     );
 
-    alert("Đã thêm vào giỏ hàng");
+    setMessage("🛒 Đã thêm vào giỏ hàng");
+    setShowToast(true);
+
+    setTimeout(() => {
+      setShowToast(false);
+    }, 2000);
   }}
   className="bg-sky-500 py-2 rounded-lg mb-2"
 >
   🛒 Thêm vào giỏ hàng
 </button>
-
                 <button className="bg-red-500 py-2 rounded-lg">
                   ⚡ Mua ngay
                 </button>
@@ -177,24 +188,29 @@ export default function ProductsPage() {
 
                 <button
   onClick={(e) => {
-  e.stopPropagation();
+    e.stopPropagation();
 
-  const cart = JSON.parse(
-    localStorage.getItem("cart") || "[]"
-  );
+    const cart = JSON.parse(
+      localStorage.getItem("cart") || "[]"
+    );
 
-  cart.push({
-    name: "Váy nữ",
-    price: 349000,
-  });
+    cart.push({
+      name: "Váy nữ",
+      price: 349000,
+    });
 
-  localStorage.setItem(
-    "cart",
-    JSON.stringify(cart)
-  );
+    localStorage.setItem(
+      "cart",
+      JSON.stringify(cart)
+    );
 
-  alert("Đã thêm vào giỏ hàng");
-}}
+    setMessage("🛒 Đã thêm vào giỏ hàng");
+    setShowToast(true);
+
+    setTimeout(() => {
+      setShowToast(false);
+    }, 2000);
+  }}
   className="bg-sky-500 py-2 rounded-lg mb-2"
 >
   🛒 Thêm vào giỏ hàng
@@ -252,7 +268,12 @@ export default function ProductsPage() {
       JSON.stringify(cart)
     );
 
-    alert("Đã thêm vào giỏ hàng");
+    setMessage("🛒 Đã thêm vào giỏ hàng");
+    setShowToast(true);
+
+    setTimeout(() => {
+      setShowToast(false);
+    }, 2000);
   }}
   className="bg-sky-500 py-2 rounded-lg mb-2"
 >
@@ -267,7 +288,11 @@ export default function ProductsPage() {
           </div>
 
         </div>
-
+{showToast && (
+  <div className="fixed top-5 right-5 bg-green-500 text-white px-5 py-3 rounded-xl shadow-xl z-50">
+    {message}
+  </div>
+)}
       </div>
     </div>
   );
