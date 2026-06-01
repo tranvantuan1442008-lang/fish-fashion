@@ -47,9 +47,30 @@ export default function ProductsPage() {
                   Chất liệu cotton cao cấp, mềm mại và thoáng mát.
                 </p>
 
-                <button className="bg-sky-500 py-2 rounded-lg mb-2">
-                  🛒 Thêm vào giỏ hàng
-                </button>
+                <button
+  onClick={(e) => {
+    e.stopPropagation();
+
+    const cart = JSON.parse(
+      localStorage.getItem("cart") || "[]"
+    );
+
+    cart.push({
+      name: "Áo thun nam",
+      price: 199000,
+    });
+
+    localStorage.setItem(
+      "cart",
+      JSON.stringify(cart)
+    );
+
+    alert("Đã thêm vào giỏ hàng");
+  }}
+  className="bg-sky-500 py-2 rounded-lg mb-2"
+>
+  🛒 Thêm vào giỏ hàng
+</button>
 
                 <button className="bg-red-500 py-2 rounded-lg">
                   ⚡ Mua ngay
@@ -85,9 +106,30 @@ export default function ProductsPage() {
                   Jean co giãn, form trẻ trung, dễ phối đồ.
                 </p>
 
-                <button className="bg-sky-500 py-2 rounded-lg mb-2">
-                  🛒 Thêm vào giỏ hàng
-                </button>
+                <button
+  onClick={(e) => {
+    e.stopPropagation();
+
+    const cart = JSON.parse(
+      localStorage.getItem("cart") || "[]"
+    );
+
+    cart.push({
+      name: "Quần jean nam",
+      price: 299000,
+    });
+
+    localStorage.setItem(
+      "cart",
+      JSON.stringify(cart)
+    );
+
+    alert("Đã thêm vào giỏ hàng");
+  }}
+  className="bg-sky-500 py-2 rounded-lg mb-2"
+>
+  🛒 Thêm vào giỏ hàng
+</button>
 
                 <button className="bg-red-500 py-2 rounded-lg">
                   ⚡ Mua ngay
@@ -135,24 +177,24 @@ export default function ProductsPage() {
 
                 <button
   onClick={(e) => {
-    e.stopPropagation();
+  e.stopPropagation();
 
-    const cart = JSON.parse(
-      localStorage.getItem("cart") || "[]"
-    );
+  const cart = JSON.parse(
+    localStorage.getItem("cart") || "[]"
+  );
 
-    cart.push({
-      name: "Áo thun nam",
-      price: 199000,
-    });
+  cart.push({
+    name: "Váy nữ",
+    price: 349000,
+  });
 
-    localStorage.setItem(
-      "cart",
-      JSON.stringify(cart)
-    );
+  localStorage.setItem(
+    "cart",
+    JSON.stringify(cart)
+  );
 
-    alert("Đã thêm vào giỏ hàng");
-  }}
+  alert("Đã thêm vào giỏ hàng");
+}}
   className="bg-sky-500 py-2 rounded-lg mb-2"
 >
   🛒 Thêm vào giỏ hàng
@@ -192,9 +234,30 @@ export default function ProductsPage() {
                   Chất liệu mềm mại, kiểu dáng hiện đại.
                 </p>
 
-                <button className="bg-sky-500 py-2 rounded-lg mb-2">
-                  🛒 Thêm vào giỏ hàng
-                </button>
+                <button
+  onClick={(e) => {
+    e.stopPropagation();
+
+    const cart = JSON.parse(
+      localStorage.getItem("cart") || "[]"
+    );
+
+    cart.push({
+      name: "Áo nữ",
+      price: 249000,
+    });
+
+    localStorage.setItem(
+      "cart",
+      JSON.stringify(cart)
+    );
+
+    alert("Đã thêm vào giỏ hàng");
+  }}
+  className="bg-sky-500 py-2 rounded-lg mb-2"
+>
+  🛒 Thêm vào giỏ hàng
+</button>
 
                 <button className="bg-red-500 py-2 rounded-lg">
                   ⚡ Mua ngay
