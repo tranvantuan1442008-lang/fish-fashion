@@ -22,3 +22,34 @@ export async function POST(req: Request) {
     });
   }
 }
+export async function GET() {
+  await connectDB();
+
+  const orders = await Order.find()
+    .sort({ createdAt: -1 });
+
+  return NextResponse.json({
+    success: true,
+    orders,
+  });
+}
+export async function PATCH(req: Request) {
+  await connectDB();
+
+  const body = await req.json();
+
+  const order = await Order.findByIdAndUpdate(
+    body.id,
+    {
+      status: body.status,
+    },
+    {
+      new: true,
+    }
+  );
+
+  return NextResponse.json({
+    success: true,
+    order,
+  });
+}

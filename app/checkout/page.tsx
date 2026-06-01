@@ -1,8 +1,9 @@
 "use client";
-
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function CheckoutPage() {
+    const router = useRouter();
   const [province, setProvince] = useState("");
   const [district, setDistrict] = useState("");
   const [ward, setWard] = useState("");
@@ -73,19 +74,17 @@ if (!addressDetail.trim()) {
 
   const data = await res.json();
 console.log(data);
+  
   if (data.success) {
-    setSuccess(true);
 
-setTimeout(() => {
-  setSuccess(false);
-}, 3000);
+  localStorage.removeItem("cart");
 
-    localStorage.removeItem("cart");
+  window.dispatchEvent(
+    new Event("cartUpdated")
+  );
 
-    window.dispatchEvent(
-      new Event("cartUpdated")
-    );
-  }
+  router.push("/success");
+}
 };
   return (
     <div className="min-h-screen p-8 max-w-4xl mx-auto">

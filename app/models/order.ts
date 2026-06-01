@@ -5,7 +5,10 @@ const OrderSchema = new mongoose.Schema(
     name: String,
     phone: String,
     address: String,
-
+status: {
+  type: String,
+  default: "Chờ xác nhận",
+},
     products: [
       {
         name: String,
