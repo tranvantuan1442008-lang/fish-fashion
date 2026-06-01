@@ -81,9 +81,7 @@ export default function LoginPage() {
   localStorage.setItem("isLogin", "true");
   localStorage.setItem("userEmail", email);
 
-  setTimeout(() => {
-    router.push("/");
-  }, 1000);
+  window.location.href = "/";
 }
               }}
             >
