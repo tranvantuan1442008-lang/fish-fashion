@@ -25,11 +25,39 @@ export default function CartPage() {
       JSON.stringify(newCart)
     );
   };
+const increaseQuantity = (index: number) => {
+  const newCart = [...cart];
 
-  const total = cart.reduce(
-    (sum, item) => sum + item.price,
-    0
+  newCart[index].quantity =
+    (newCart[index].quantity || 1) + 1;
+
+  setCart(newCart);
+
+  localStorage.setItem(
+    "cart",
+    JSON.stringify(newCart)
   );
+};
+
+const decreaseQuantity = (index: number) => {
+  const newCart = [...cart];
+
+  if ((newCart[index].quantity || 1) > 1) {
+    newCart[index].quantity--;
+
+    setCart(newCart);
+
+    localStorage.setItem(
+      "cart",
+      JSON.stringify(newCart)
+    );
+  }
+};
+  const total = cart.reduce(
+  (sum, item) =>
+    sum + item.price * (item.quantity || 1),
+  0
+);
 
   return (
     <div className="min-h-screen p-8 max-w-5xl mx-auto">
@@ -60,14 +88,48 @@ export default function CartPage() {
                 "
               >
                 <div>
-                  <h2 className="font-bold">
-                    {item.name}
-                  </h2>
+  <h2 className="font-bold">
+    {item.name}
+  </h2>
 
-                  <p className="text-red-500">
-                    {item.price.toLocaleString()}đ
-                  </p>
-                </div>
+  <p className="text-red-500">
+    {item.price.toLocaleString()}đ
+  </p>
+
+  <div className="flex items-center gap-3 mt-2">
+
+    <button
+      onClick={() =>
+        decreaseQuantity(index)
+      }
+      className="
+        bg-gray-300
+        px-3
+        rounded
+      "
+    >
+      -
+    </button>
+
+    <span className="font-bold">
+      {item.quantity || 1}
+    </span>
+
+    <button
+      onClick={() =>
+        increaseQuantity(index)
+      }
+      className="
+        bg-gray-300
+        px-3
+        rounded
+      "
+    >
+      +
+    </button>
+
+  </div>
+</div>
 
                 <button
                   onClick={() => removeItem(index)}

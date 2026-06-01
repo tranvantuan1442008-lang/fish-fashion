@@ -58,9 +58,10 @@ const [message, setMessage] = useState("");
     );
 
     cart.push({
-      name: "Áo thun nam",
-      price: 199000,
-    });
+  name: "Áo thun nam",
+  price: 199000,
+  quantity: 1,
+});
 
     localStorage.setItem(
       "cart",
@@ -122,9 +123,10 @@ const [message, setMessage] = useState("");
     );
 
     cart.push({
-      name: "Quần jean nam",
-      price: 299000,
-    });
+  name: "Quần jean nam",
+  price: 299000,
+  quantity: 1,
+});
 
     localStorage.setItem(
       "cart",
@@ -195,9 +197,10 @@ const [message, setMessage] = useState("");
     );
 
     cart.push({
-      name: "Váy nữ",
-      price: 349000,
-    });
+  name: "Váy nữ",
+  price: 349000,
+  quantity: 1,
+});
 
     localStorage.setItem(
       "cart",
@@ -259,9 +262,10 @@ const [message, setMessage] = useState("");
     );
 
     cart.push({
-      name: "Áo nữ",
-      price: 249000,
-    });
+  name: "Áo nữ",
+  price: 249000,
+  quantity: 1,
+});
 
     localStorage.setItem(
       "cart",
