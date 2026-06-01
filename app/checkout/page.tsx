@@ -1,6 +1,12 @@
 "use client";
 
+import { useState } from "react";
+
 export default function CheckoutPage() {
+  const [province, setProvince] = useState("");
+  const [district, setDistrict] = useState("");
+  const [ward, setWard] = useState("");
+
   return (
     <div className="min-h-screen p-8 max-w-4xl mx-auto">
       <h1 className="text-4xl font-bold mb-8">
@@ -21,47 +27,62 @@ export default function CheckoutPage() {
           className="w-full border p-3 rounded-lg"
         />
 
-        <select className="w-full border p-3 rounded-lg">
-  <option>Chọn tỉnh</option>
-  <option>Bắc Giang</option>
-  <option>Hà Nội</option>
-  <option>Hải Phòng</option>
-  <option>Đà Nẵng</option>
-  <option>TP Hồ Chí Minh</option>
-</select>
-
-<select className="w-full border p-3 rounded-lg">
-  <option>Chọn huyện</option>
-  <option>Yên Dũng</option>
-  <option>Lạng Giang</option>
-  <option>Việt Yên</option>
-</select>
-
-<select className="w-full border p-3 rounded-lg">
-  <option>Chọn xã</option>
-  <option>Nội Hoàng</option>
-  <option>Tiền Phong</option>
-  <option>Tân Liễu</option>
-</select>
-
-<input
-  type="text"
-  placeholder="Số nhà / thôn / xóm"
-  className="w-full border p-3 rounded-lg"
-/>
-
-        <button
-          className="
-            bg-green-500
-            text-white
-            px-6
-            py-3
-            rounded-xl
-            font-bold
-          "
+        <select
+          value={province}
+          onChange={(e) => setProvince(e.target.value)}
+          className="w-full border p-3 rounded-lg"
         >
-          Xác nhận đặt hàng
-        </button>
+          <option value="">Chọn tỉnh</option>
+          <option value="bacgiang">Bắc Giang</option>
+          <option value="hanoi">Hà Nội</option>
+        </select>
+
+        {province && (
+          <select
+            value={district}
+            onChange={(e) => setDistrict(e.target.value)}
+            className="w-full border p-3 rounded-lg"
+          >
+            <option value="">Chọn huyện</option>
+            <option value="yendung">Yên Dũng</option>
+            <option value="langgiang">Lạng Giang</option>
+          </select>
+        )}
+
+        {district && (
+          <select
+            value={ward}
+            onChange={(e) => setWard(e.target.value)}
+            className="w-full border p-3 rounded-lg"
+          >
+            <option value="">Chọn xã</option>
+            <option value="noihoang">Nội Hoàng</option>
+            <option value="tienphong">Tiền Phong</option>
+          </select>
+        )}
+
+        {ward && (
+          <input
+            type="text"
+            placeholder="Số nhà / thôn / xóm"
+            className="w-full border p-3 rounded-lg"
+          />
+        )}
+
+        {ward && (
+          <button
+            className="
+              bg-green-500
+              text-white
+              px-6
+              py-3
+              rounded-xl
+              font-bold
+            "
+          >
+            Xác nhận đặt hàng
+          </button>
+        )}
 
       </div>
     </div>
