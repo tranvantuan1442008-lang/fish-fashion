@@ -18,6 +18,46 @@ useEffect(() => {
       setProvinces(data);
     });
 }, []);
+const handleOrder = async () => {
+  const cart = JSON.parse(
+    localStorage.getItem("cart") || "[]"
+  );
+
+  const total = cart.reduce(
+    (sum: number, item: any) =>
+      sum + item.price * (item.quantity || 1),
+    0
+  );
+
+  const res = await fetch(
+    "/api/order",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: "Khách hàng",
+        phone: "0123456789",
+        address: "Địa chỉ test",
+        products: cart,
+        total,
+      }),
+    }
+  );
+
+  const data = await res.json();
+
+  if (data.success) {
+    alert("🎉 Đặt hàng thành công");
+
+    localStorage.removeItem("cart");
+
+    window.dispatchEvent(
+      new Event("cartUpdated")
+    );
+  }
+};
   return (
     <div className="min-h-screen p-8 max-w-4xl mx-auto">
       <h1 className="text-4xl font-bold mb-8">
@@ -141,17 +181,18 @@ useEffect(() => {
 
         {ward && (
           <button
-            className="
-              bg-green-500
-              text-white
-              px-6
-              py-3
-              rounded-xl
-              font-bold
-            "
-          >
-            Xác nhận đặt hàng
-          </button>
+  onClick={handleOrder}
+  className="
+    bg-green-500
+    text-white
+    px-6
+    py-3
+    rounded-xl
+    font-bold
+  "
+>
+  Xác nhận đặt hàng
+</button>
         )}
 
       </div>
