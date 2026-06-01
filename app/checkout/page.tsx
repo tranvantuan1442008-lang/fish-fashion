@@ -21,11 +21,34 @@ export default function CheckoutPage() {
           className="w-full border p-3 rounded-lg"
         />
 
-        <input
-          type="text"
-          placeholder="Địa chỉ giao hàng"
-          className="w-full border p-3 rounded-lg"
-        />
+        <select className="w-full border p-3 rounded-lg">
+  <option>Chọn tỉnh</option>
+  <option>Bắc Giang</option>
+  <option>Hà Nội</option>
+  <option>Hải Phòng</option>
+  <option>Đà Nẵng</option>
+  <option>TP Hồ Chí Minh</option>
+</select>
+
+<select className="w-full border p-3 rounded-lg">
+  <option>Chọn huyện</option>
+  <option>Yên Dũng</option>
+  <option>Lạng Giang</option>
+  <option>Việt Yên</option>
+</select>
+
+<select className="w-full border p-3 rounded-lg">
+  <option>Chọn xã</option>
+  <option>Nội Hoàng</option>
+  <option>Tiền Phong</option>
+  <option>Tân Liễu</option>
+</select>
+
+<input
+  type="text"
+  placeholder="Số nhà / thôn / xóm"
+  className="w-full border p-3 rounded-lg"
+/>
 
         <button
           className="
