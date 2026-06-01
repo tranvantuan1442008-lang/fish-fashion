@@ -73,9 +73,13 @@ if (existingItem) {
 }
 
     localStorage.setItem(
-      "cart",
-      JSON.stringify(cart)
-    );
+  "cart",
+  JSON.stringify(cart)
+);
+
+window.dispatchEvent(
+  new Event("cartUpdated")
+);
 
     setMessage("🛒 Đã thêm vào giỏ hàng");
     setShowToast(true);
@@ -131,6 +135,7 @@ if (existingItem) {
       localStorage.getItem("cart") || "[]"
     );
 
+
     cart.push({
   name: "Quần jean nam",
   price: 299000,
@@ -141,7 +146,9 @@ if (existingItem) {
       "cart",
       JSON.stringify(cart)
     );
-
+window.dispatchEvent(
+  new Event("cartUpdated")
+);
     setMessage("🛒 Đã thêm vào giỏ hàng");
     setShowToast(true);
 
@@ -215,7 +222,9 @@ if (existingItem) {
       "cart",
       JSON.stringify(cart)
     );
-
+window.dispatchEvent(
+  new Event("cartUpdated")
+);
     setMessage("🛒 Đã thêm vào giỏ hàng");
     setShowToast(true);
 
@@ -280,7 +289,9 @@ if (existingItem) {
       "cart",
       JSON.stringify(cart)
     );
-
+window.dispatchEvent(
+  new Event("cartUpdated")
+);
     setMessage("🛒 Đã thêm vào giỏ hàng");
     setShowToast(true);
 
