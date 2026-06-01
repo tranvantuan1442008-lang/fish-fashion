@@ -8,12 +8,17 @@ export default function Header() {
   const [isLogin, setIsLogin] = useState(false);
   const [userEmail, setUserEmail] = useState("");
   const [showProfile, setShowProfile] = useState(false);
+const [cartCount, setCartCount] = useState(0); 
 
   useEffect(() => {
     const checkLogin = () => {
       const login = localStorage.getItem("isLogin");
       const email = localStorage.getItem("userEmail");
+const cart = JSON.parse(
+  localStorage.getItem("cart") || "[]"
+);
 
+setCartCount(cart.length);
       if (login === "true" && email) {
         setIsLogin(true);
         setUserEmail(email);
@@ -67,8 +72,9 @@ export default function Header() {
     font-bold
   "
 >
-  🛒
+  🛒 {cartCount}
 </Link>
+
 
           {!isLogin ? (
             <Link
