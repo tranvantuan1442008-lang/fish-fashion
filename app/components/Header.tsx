@@ -36,14 +36,14 @@ window.addEventListener(
   checkLogin
 );
     return () => {
-      window.removeEventListener("focus", checkLogin);
-         window.addEventListener(
-  "cartUpdated",
-  checkLogin
-);
-    };
- 
-  }, []);
+  window.removeEventListener("focus", checkLogin);
+
+  window.removeEventListener(
+    "cartUpdated",
+    checkLogin
+  );
+};
+   }, []);
 
   return (
     <header className="border-b bg-sky-500 text-white">
