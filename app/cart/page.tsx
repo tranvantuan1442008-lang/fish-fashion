@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function CartPage() {
@@ -165,19 +166,21 @@ const decreaseQuantity = (index: number) => {
               </span>
             </h2>
 
-            <button
-              className="
-                mt-4
-                bg-green-500
-                text-white
-                px-6
-                py-3
-                rounded-xl
-                font-bold
-              "
-            >
-              Thanh toán
-            </button>
+            <Link
+  href="/checkout"
+  className="
+    inline-block
+    mt-4
+    bg-green-500
+    text-white
+    px-6
+    py-3
+    rounded-xl
+    font-bold
+  "
+>
+  Thanh toán
+</Link>
           </div>
         </>
       )}
