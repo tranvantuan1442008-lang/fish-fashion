@@ -66,10 +66,11 @@ if (existingItem) {
     (existingItem.quantity || 1) + 1;
 } else {
   cart.push({
-    name: "Áo thun nam",
-    price: 199000,
-    quantity: 1,
-  });
+  name: "Áo thun nam",
+  price: 199000,
+  image: "/nam1.jpg",
+  quantity: 1,
+});
 }
 
     localStorage.setItem(
@@ -139,6 +140,7 @@ window.dispatchEvent(
     cart.push({
   name: "Quần jean nam",
   price: 299000,
+  image: "/nam2.jpg",
   quantity: 1,
 });
 
@@ -215,6 +217,7 @@ window.dispatchEvent(
     cart.push({
   name: "Váy nữ",
   price: 349000,
+  image: "/nu1.jpg",
   quantity: 1,
 });
 
@@ -282,6 +285,7 @@ window.dispatchEvent(
     cart.push({
   name: "Áo nữ",
   price: 249000,
+  image: "/nu2.jpg",
   quantity: 1,
 });
 

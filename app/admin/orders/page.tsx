@@ -130,17 +130,42 @@ export default function OrdersPage() {
   </button>
 
 </div>
-<div className="mt-2">
-  <p className="font-bold">
+<div className="mt-3">
+  <p className="font-bold mb-2">
     Sản phẩm:
   </p>
 
   {order.products?.map(
     (item: any, index: number) => (
-      <div key={index}>
-        • {item.name}
-        {" - "}
-        SL: {item.quantity || 1}
+      <div
+        key={index}
+        className="flex items-center gap-3 mb-3"
+      >
+        <img
+          src={item.image}
+          alt={item.name}
+          className="
+            w-16
+            h-16
+            object-cover
+            rounded-lg
+            border
+          "
+        />
+
+        <div>
+          <p className="font-medium">
+            {item.name}
+          </p>
+
+          <p>
+            SL: {item.quantity || 1}
+          </p>
+
+          <p className="text-green-600 font-bold">
+            {item.price?.toLocaleString()}đ
+          </p>
+        </div>
       </div>
     )
   )}
