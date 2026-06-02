@@ -23,33 +23,53 @@ export default function AdminProductsPage() {
   }, []);
 
   const addProduct = async () => {
-    if (!name || !price) {
-      alert("Vui lòng nhập tên và giá");
-      return;
-    }
+  if (!name || !price) {
+    alert("Vui lòng nhập tên và giá");
+    return;
+  }
 
-    await fetch("/api/products", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name,
-        price: Number(price),
-        image,
-        category,
-        description,
-      }),
-    });
+  await fetch("/api/products", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      name,
+      price: Number(price),
+      image,
+      category,
+      description,
+    }),
+  });
 
-    setName("");
-    setPrice("");
-    setImage("");
-    setCategory("");
-    setDescription("");
+  setName("");
+  setPrice("");
+  setImage("");
+  setCategory("");
+  setDescription("");
 
-    loadProducts();
-  };
+  loadProducts();
+};
+
+const deleteProduct = async (
+  id: string
+) => {
+  const ok = confirm(
+    "Bạn có chắc muốn xóa sản phẩm này?"
+  );
+
+  if (!ok) return;
+
+  await fetch("/api/products", {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ id }),
+  });
+
+  loadProducts();
+};
 
   return (
     <div className="max-w-6xl mx-auto p-8">
@@ -146,6 +166,23 @@ export default function AdminProductsPage() {
             <p className="text-gray-500">
               {product.category}
             </p>
+            <button
+  onClick={() =>
+    deleteProduct(product._id)
+  }
+  className="
+    mt-3
+    bg-red-500
+    hover:bg-red-600
+    text-white
+    px-4
+    py-2
+    rounded-lg
+    font-bold
+  "
+>
+  🗑️ Xóa
+</button>
           </div>
         ))}
 

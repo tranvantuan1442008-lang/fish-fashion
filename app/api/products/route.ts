@@ -31,3 +31,15 @@ export async function POST(req: Request) {
     product,
   });
 }
+
+export async function DELETE(req: Request) {
+  await connectDB();
+
+  const { id } = await req.json();
+
+  await Product.findByIdAndDelete(id);
+
+  return NextResponse.json({
+    success: true,
+  });
+}
