@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 export default function AdminLoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+const [error, setError] = useState("");
 
   const router = useRouter();
 
@@ -16,6 +17,7 @@ console.log(password);
   username.trim() === "admin" &&
   password.trim() === "123456"
 ) {
+    setError("");
       localStorage.setItem(
         "adminLoggedIn",
         "true"
@@ -23,8 +25,12 @@ console.log(password);
 
       router.push("/admin/orders");
     } else {
-      alert("Sai tài khoản hoặc mật khẩu");
-    }
+  setError("❌ Sai tài khoản hoặc mật khẩu");
+
+  setTimeout(() => {
+    setError("");
+  }, 2000);
+}
   };
 
   return (
@@ -55,17 +61,34 @@ console.log(password);
         />
 
         <button
-          onClick={handleLogin}
-          className="
-            w-full
-            bg-blue-500
-            text-white
-            py-3
-            rounded
-          "
-        >
-          Đăng nhập
-        </button>
+  onClick={handleLogin}
+  style={{
+    width: "100%",
+    background: "#2563eb",
+    color: "white",
+    padding: "14px",
+    borderRadius: "12px",
+    fontSize: "18px",
+    fontWeight: "bold",
+  }}
+>
+  ĐĂNG NHẬP ADMIN
+</button>
+{error && (
+  <div
+    className="
+      mt-3
+      bg-red-100
+      text-red-600
+      p-3
+      rounded-lg
+      text-center
+      font-medium
+    "
+  >
+    {error}
+  </div>
+)}
       </div>
     </div>
   );

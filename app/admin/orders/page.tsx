@@ -9,7 +9,7 @@ export default function OrdersPage() {
 
   useEffect(() => {
 
-    
+
     const isAdmin =
   localStorage.getItem(
     "adminLoggedIn"
@@ -37,7 +37,28 @@ if (!isAdmin) {
       <h1 className="text-4xl font-bold mb-8">
         📦 Quản lý đơn hàng
       </h1>
+<div className="mb-6">
+  <button
+    onClick={() => {
+      localStorage.removeItem(
+        "adminLoggedIn"
+      );
 
+      router.push("/admin/login");
+    }}
+    className="
+      bg-red-500
+      hover:bg-red-600
+      text-white
+      px-4
+      py-2
+      rounded-lg
+      font-bold
+    "
+  >
+    🚪 Đăng xuất
+  </button>
+</div>
       <div className="space-y-4">
         {orders.map((order) => (
           <div
