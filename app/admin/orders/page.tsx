@@ -1,16 +1,35 @@
 "use client";
-
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function OrdersPage() {
+
+  const router = useRouter();
   const [orders, setOrders] = useState<any[]>([]);
 
   useEffect(() => {
+
+    
+    const isAdmin =
+  localStorage.getItem(
+    "adminLoggedIn"
+  );
+
+if (!isAdmin) {
+  router.push("/admin/login");
+  return;
+}
     fetch("/api/order")
       .then((res) => res.json())
       .then((data) => {
-        setOrders(data.orders);
-      });
+  const sortedOrders = data.orders.sort(
+    (a: any, b: any) =>
+      new Date(b.createdAt).getTime() -
+      new Date(a.createdAt).getTime()
+  );
+
+  setOrders(sortedOrders);
+});
   }, []);
 
   return (
