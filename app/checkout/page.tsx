@@ -76,7 +76,7 @@ if (!addressDetail.trim()) {
 console.log(data);
   
   if (data.success) {
-alert("Đặt hàng thành công");
+
   localStorage.removeItem("cart");
 
   window.dispatchEvent(
