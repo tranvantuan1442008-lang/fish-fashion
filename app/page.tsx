@@ -17,6 +17,13 @@ useEffect(() => {
     }, 800);
   }
 }, []);
+useEffect(() => {
+  fetch("/api/products")
+    .then((res) => res.json())
+    .then((data) => {
+      setProducts(data.products);
+    });
+}, []);
   return (
     <>
   {showPopup && (
