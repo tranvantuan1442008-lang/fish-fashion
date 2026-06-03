@@ -7,7 +7,7 @@ export default function Header() {
 
   const [isLogin, setIsLogin] = useState(false);
 const [userEmail, setUserEmail] = useState("");
-
+const [showMenu, setShowMenu] = useState(false);
 useEffect(() => {
   const login =
     localStorage.getItem("isLogin");
@@ -106,10 +106,65 @@ useEffect(() => {
       </Link>
     </>
   ) : (
-    <>
-      <span className="text-white text-sm">
-        👤 {userEmail}
-      </span>
+    <div className="relative">
+
+  <button
+    onClick={() =>
+      setShowMenu(!showMenu)
+    }
+    className="
+      bg-white
+      text-sky-600
+      w-12
+      h-12
+      rounded-full
+      font-bold
+      text-xl
+    "
+  >
+    👤
+  </button>
+
+  {showMenu && (
+    <div
+      className="
+        absolute
+        right-0
+        mt-2
+        bg-white
+        rounded-xl
+        shadow-xl
+        w-52
+        overflow-hidden
+      "
+    >
+      <div className="p-3 border-b text-sm">
+        {userEmail}
+      </div>
+
+      <Link
+        href="/profile"
+        className="
+          block
+          px-4
+          py-3
+          hover:bg-sky-50
+        "
+      >
+        👤 Tài khoản
+      </Link>
+
+      <Link
+        href="/orders"
+        className="
+          block
+          px-4
+          py-3
+          hover:bg-sky-50
+        "
+      >
+        📦 Đơn hàng
+      </Link>
 
       <button
         onClick={() => {
@@ -118,17 +173,21 @@ useEffect(() => {
           window.location.href = "/";
         }}
         className="
-          bg-red-500
-          text-white
+          w-full
+          text-left
           px-4
-          py-2
-          rounded-xl
-          font-bold
+          py-3
+          text-red-500
+          hover:bg-red-50
         "
       >
-        Đăng xuất
+        🚪 Đăng xuất
       </button>
-    </>
+
+    </div>
+  )}
+
+</div>
   )}
 
 </div>
