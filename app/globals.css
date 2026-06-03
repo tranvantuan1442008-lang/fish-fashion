@@ -37,3 +37,17 @@ body {
 .animate-marquee {
   animation: marquee 18s linear infinite;
 }
+.wave-bg {
+  background-image: url("/fish-banner.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.wave-overlay {
+  position: fixed;
+  inset: 0;
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: -1;
+}

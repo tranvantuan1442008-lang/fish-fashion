@@ -30,7 +30,18 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      <body
+  className="
+    min-h-full
+    flex
+    flex-col
+    bg-gradient-to-b
+    from-sky-50
+    via-white
+    to-sky-100
+  "
+>
+  <div className="wave-overlay wave-bg" />
   <Header />
   <BackButton />
 

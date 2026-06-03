@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 export default function Home() {
   const [products, setProducts] = useState<any[]>([]);
-
+const [showPopup, setShowPopup] = useState(false);
 useEffect(() => {
   fetch("/api/products")
     .then((res) => res.json())
@@ -15,7 +15,100 @@ useEffect(() => {
       );
     });
 }, []);
+useEffect(() => {
+  const popupClosed =
+    localStorage.getItem("popupClosed");
+
+  if (!popupClosed) {
+    setTimeout(() => {
+      setShowPopup(true);
+    }, 800);
+  }
+}, []);
   return (
+    <>
+  {showPopup && (
+    <div className="fixed inset-0 bg-black/50 z-[999] flex items-center justify-center px-4">
+
+      <div className="bg-white rounded-3xl overflow-hidden shadow-2xl max-w-md w-full relative">
+
+        <button
+          onClick={() => {
+            setShowPopup(false);
+
+            localStorage.setItem(
+              "popupClosed",
+              "true"
+            );
+          }}
+          className="
+            absolute
+            top-3
+            right-3
+            bg-white
+            w-10
+            h-10
+            rounded-full
+            shadow
+            text-xl
+          "
+        >
+          ✕
+        </button>
+
+        <img
+          src="/fish-banner.png"
+          alt=""
+          className="
+            w-full
+            h-56
+            object-cover
+          "
+        />
+
+        <div className="p-6 text-center">
+
+          <h2 className="text-3xl font-extrabold text-red-500">
+            🔥 SALE HÈ 2026
+          </h2>
+
+          <p className="mt-4 text-lg">
+            Giảm giá đến 50%
+          </p>
+
+          <p>🚚 Freeship toàn quốc</p>
+
+          <p>🎁 Mua 2 tặng 1</p>
+
+          <button
+            onClick={() => {
+              setShowPopup(false);
+
+              localStorage.setItem(
+                "popupClosed",
+                "true"
+              );
+            }}
+            className="
+              mt-6
+              bg-sky-500
+              text-white
+              px-8
+              py-3
+              rounded-full
+              font-bold
+            "
+          >
+            Mua ngay
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+  )}
+
     <main className="bg-white">
 
       {/* Hero */}
@@ -251,5 +344,6 @@ useEffect(() => {
       </section>
 
     </main>
-  );
+</>
+);
 }
