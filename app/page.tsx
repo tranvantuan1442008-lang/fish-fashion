@@ -64,6 +64,21 @@ useEffect(() => {
           >
             Thời trang hiện đại dành cho giới trẻ
           </p>
+<div
+  className="
+    mt-5
+    inline-block
+    bg-red-500
+    text-white
+    px-5
+    py-2
+    rounded-full
+    font-bold
+    animate-pulse
+  "
+>
+  🔥 SALE UP TO 50%
+</div>
 
           <Link
             href="/products"
@@ -85,7 +100,7 @@ useEffect(() => {
         </div>
       </section>
 {/* Featured Products */}
-<section className="max-w-7xl mx-auto py-20 px-6">
+<section className="max-w-7xl mx-auto py-10 px-6">
 
   <h2 className="text-4xl font-bold text-center mb-12">
     🔥 Sản phẩm nổi bật

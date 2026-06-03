@@ -51,9 +51,9 @@ export default function Footer() {
             </h3>
 
             <ul className="space-y-2 text-sky-100">
-              <li>📞 0123 456 789</li>
-              <li>📧 fishfashion@gmail.com</li>
-              <li>📍 Hà Nội, Việt Nam</li>
+              <li>📞 0964650114 </li>
+              <li>📧 fishshop22110@gmail.com</li>
+              <li>📍 NGHỆ AN, Việt Nam</li>
             </ul>
 
             <div className="flex gap-4 mt-5 text-2xl">
