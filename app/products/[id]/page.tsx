@@ -63,6 +63,54 @@ export default function ProductDetail() {
             <p className="mt-6 text-gray-600">
               {product.description}
             </p>
+            <div className="flex gap-4 mt-10">
+
+  <button
+    onClick={() => {
+      const cart = JSON.parse(
+        localStorage.getItem("cart") || "[]"
+      );
+
+      cart.push({
+        ...product,
+        quantity: 1,
+      });
+
+      localStorage.setItem(
+        "cart",
+        JSON.stringify(cart)
+      );
+
+      alert("Đã thêm vào giỏ hàng");
+    }}
+    className="
+      flex-1
+      bg-sky-500
+      hover:bg-sky-600
+      text-white
+      py-4
+      rounded-2xl
+      font-bold
+    "
+  >
+    🛒 Thêm vào giỏ
+  </button>
+
+  <button
+    className="
+      flex-1
+      bg-green-500
+      hover:bg-green-600
+      text-white
+      py-4
+      rounded-2xl
+      font-bold
+    "
+  >
+    ⚡ Mua ngay
+  </button>
+
+</div>
           </div>
 
         </div>
