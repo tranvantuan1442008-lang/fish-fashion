@@ -94,8 +94,9 @@ useEffect(() => {
   <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
 
     {products.map((product) => (
-      <div
-        key={product._id}
+  <Link
+    href={`/products/${product._id}`}
+    key={product._id}
         className="
           bg-white
           rounded-3xl
@@ -126,7 +127,7 @@ useEffect(() => {
           </p>
 
         </div>
-      </div>
+      </Link>
     ))}
 
   </div>
