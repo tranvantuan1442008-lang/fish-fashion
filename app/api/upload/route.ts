@@ -8,14 +8,24 @@ cloudinary.config({
 });
 
 export async function POST(req: Request) {
-  const body = await req.json();
+  try {
+    const body = await req.json();
 
-  const result = await cloudinary.uploader.upload(
-    body.image
-  );
+    const result =
+      await cloudinary.uploader.upload(
+        body.image
+      );
 
-  return NextResponse.json({
-    success: true,
-    url: result.secure_url,
-  });
+    return NextResponse.json({
+      success: true,
+      url: result.secure_url,
+    });
+  } catch (error) {
+    console.log(error);
+
+    return NextResponse.json({
+      success: false,
+      error,
+    });
+  }
 }
