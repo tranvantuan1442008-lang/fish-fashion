@@ -19,12 +19,14 @@ export default function LoginPage() {
         ←
       </button>
 
-      <div className="min-h-screen bg-sky-100 flex items-center justify-center">
-        <div className="bg-white w-full max-w-md p-8 rounded-2xl shadow-xl">
+      <div className="min-h-screen bg-gradient-to-b from-sky-100 to-white flex items-center justify-center px-4">
+        <div className="bg-white w-full max-w-md p-8 rounded-3xl shadow-2xl border border-sky-100">
           <h1 className="text-3xl font-bold text-center text-sky-600 mb-2">
             FISH FASHION
           </h1>
-
+<p className="text-center text-sky-500 font-medium mt-2">
+  Fashion For Everyone
+</p>
           <p className="text-center text-gray-500 mb-8">
             Đăng nhập để mua sắm
           </p>
@@ -60,7 +62,17 @@ export default function LoginPage() {
 
             <button
               type="button"
-              className="w-full bg-sky-500 text-white py-3 rounded-lg font-bold hover:bg-sky-600"
+              className="
+w-full
+bg-sky-500
+hover:bg-sky-600
+text-white
+py-3
+rounded-xl
+font-bold
+transition
+shadow-lg
+"
               onClick={async () => {
                 const res = await fetch("/api/login", {
                   method: "POST",
