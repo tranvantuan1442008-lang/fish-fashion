@@ -107,18 +107,29 @@ setTimeout(() => {
   </button>
 
   <button
-    className="
-      flex-1
-      bg-green-500
-      hover:bg-green-600
-      text-white
-      py-4
-      rounded-2xl
-      font-bold
-    "
-  >
-    ⚡ Mua ngay
-  </button>
+  onClick={() => {
+    localStorage.setItem(
+      "buyNowProduct",
+      JSON.stringify({
+        ...product,
+        quantity: 1,
+      })
+    );
+
+    window.location.href = "/checkout";
+  }}
+  className="
+    flex-1
+    bg-green-500
+    hover:bg-green-600
+    text-white
+    py-4
+    rounded-2xl
+    font-bold
+  "
+>
+  ⚡️ Mua ngay
+</button>
 
 </div>
           </div>
