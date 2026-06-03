@@ -43,3 +43,26 @@ export async function DELETE(req: Request) {
     success: true,
   });
 }
+export async function PUT(req: Request) {
+  await connectDB();
+
+  const body = await req.json();
+
+  const product =
+    await Product.findByIdAndUpdate(
+      body.id,
+      {
+        name: body.name,
+        price: body.price,
+        image: body.image,
+        category: body.category,
+        description: body.description,
+      },
+      { new: true }
+    );
+
+  return NextResponse.json({
+    success: true,
+    product,
+  });
+}

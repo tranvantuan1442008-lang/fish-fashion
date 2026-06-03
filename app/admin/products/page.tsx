@@ -8,8 +8,11 @@ export default function AdminProductsPage() {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [image, setImage] = useState("");
+  const [uploading, setUploading] = useState(false);
+  
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
+const [editingId, setEditingId] = useState("");
 
   const loadProducts = async () => {
     const res = await fetch("/api/products");
@@ -21,26 +24,75 @@ export default function AdminProductsPage() {
   useEffect(() => {
     loadProducts();
   }, []);
+const uploadImage = async (
+  file: File
+) => {
+  setUploading(true);
 
-  const addProduct = async () => {
+  const reader = new FileReader();
+
+  reader.readAsDataURL(file);
+
+  reader.onloadend = async () => {
+    const res = await fetch(
+      "/api/upload",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type":
+            "application/json",
+        },
+        body: JSON.stringify({
+          image: reader.result,
+        }),
+      }
+    );
+
+    const data = await res.json();
+
+    setImage(data.url);
+
+    setUploading(false);
+  };
+};
+  const saveProduct = async () => {
   if (!name || !price) {
     alert("Vui lòng nhập tên và giá");
     return;
   }
 
-  await fetch("/api/products", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      name,
-      price: Number(price),
-      image,
-      category,
-      description,
-    }),
-  });
+  if (editingId) {
+    await fetch("/api/products", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: editingId,
+        name,
+        price: Number(price),
+        image,
+        category,
+        description,
+      }),
+    });
+
+    setEditingId("");
+  } else {
+    await fetch("/api/products", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name,
+        price: Number(price),
+        image,
+        category,
+        description,
+      }),
+    });
+  }
 
   setName("");
   setPrice("");
@@ -50,7 +102,6 @@ export default function AdminProductsPage() {
 
   loadProducts();
 };
-
 const deleteProduct = async (
   id: string
 ) => {
@@ -70,7 +121,6 @@ const deleteProduct = async (
 
   loadProducts();
 };
-
   return (
     <div className="max-w-6xl mx-auto p-8">
 
@@ -97,12 +147,36 @@ const deleteProduct = async (
         />
 
         <input
-          type="text"
-          placeholder="Link ảnh"
-          value={image}
-          onChange={(e) => setImage(e.target.value)}
-          className="w-full border p-3 rounded mb-3"
-        />
+  type="file"
+  accept="image/*"
+  onChange={(e) => {
+    if (e.target.files?.[0]) {
+      uploadImage(
+        e.target.files[0]
+      );
+    }
+  }}
+  className="w-full border p-3 rounded mb-3"
+/>
+       {uploading && (
+  <p className="text-blue-500">
+    Đang tải ảnh...
+  </p>
+)}
+
+{image && (
+  <img
+    src={image}
+    alt=""
+    className="
+      w-32
+      h-32
+      object-cover
+      rounded-lg
+      mb-3
+    "
+  />
+)}   
 
         <input
           type="text"
@@ -122,7 +196,7 @@ const deleteProduct = async (
         />
 
         <button
-          onClick={addProduct}
+          onClick={saveProduct}
           className="
             bg-green-500
             text-white
@@ -132,7 +206,9 @@ const deleteProduct = async (
             font-bold
           "
         >
-          ➕ Thêm sản phẩm
+          {editingId
+  ? "💾 Cập nhật sản phẩm"
+  : "➕ Thêm sản phẩm"}
         </button>
 
       </div>
@@ -166,23 +242,49 @@ const deleteProduct = async (
             <p className="text-gray-500">
               {product.category}
             </p>
-            <button
-  onClick={() =>
-    deleteProduct(product._id)
-  }
-  className="
-    mt-3
-    bg-red-500
-    hover:bg-red-600
-    text-white
-    px-4
-    py-2
-    rounded-lg
-    font-bold
-  "
->
-  🗑️ Xóa
-</button>
+            <div className="flex gap-2 mt-3">
+
+  <button
+    onClick={() => {
+      setEditingId(product._id);
+
+      setName(product.name);
+      setPrice(product.price.toString());
+      setImage(product.image);
+      setCategory(product.category);
+      setDescription(product.description);
+    }}
+    className="
+      bg-blue-500
+      hover:bg-blue-600
+      text-white
+      px-4
+      py-2
+      rounded-lg
+      font-bold
+    "
+  >
+    ✏️ Sửa
+  </button>
+
+  <button
+    onClick={() =>
+      deleteProduct(product._id)
+    }
+    className="
+      bg-red-500
+      hover:bg-red-600
+      text-white
+      px-4
+      py-2
+      rounded-lg
+      font-bold
+    "
+  >
+    🗑️ Xóa
+  </button>
+
+</div>
           </div>
         ))}
 

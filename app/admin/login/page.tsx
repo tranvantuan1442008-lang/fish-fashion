@@ -23,7 +23,7 @@ console.log(password);
         "true"
       );
 
-      router.push("/admin/orders");
+      router.push("/admin");
     } else {
   setError("❌ Sai tài khoản hoặc mật khẩu");
 
