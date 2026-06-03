@@ -1,146 +1,135 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
 
-export default function ProductDetailPage() {
-  const params = useParams();
-
-  const [product, setProduct] =
-    useState<any>(null);
+export default function ProductDetail({
+  params,
+}: {
+  params: { id: string };
+}) {
+  const [product, setProduct] = useState<any>(null);
 
   useEffect(() => {
     fetch("/api/products")
       .then((res) => res.json())
       .then((data) => {
-        const found =
-          data.products.find(
-            (p: any) =>
-              p._id === params.id
-          );
+        const found = data.products.find(
+          (p: any) => p._id === params.id
+        );
 
         setProduct(found);
       });
-  }, []);
+  }, [params.id]);
 
   if (!product) {
     return (
-      <div className="p-10 text-center">
+      <div className="min-h-screen flex justify-center items-center">
         Đang tải...
       </div>
     );
   }
 
   return (
-    <div
-      className="
-        min-h-screen
-        bg-gradient-to-b
-        from-sky-100
-        to-white
-        py-10
-        px-4
-      "
-    >
-      <div
-        className="
-          max-w-6xl
-          mx-auto
-          bg-white
-          rounded-3xl
-          shadow-xl
-          p-6
-          md:p-10
-        "
-      >
-        <div
-          className="
-            grid
-            md:grid-cols-2
-            gap-10
-          "
-        >
-          <img
-            src={product.image}
-            alt={product.name}
-            className="
-              w-full
-              rounded-3xl
-              object-cover
-            "
-          />
+    <div className="min-h-screen bg-gradient-to-b from-sky-100 to-white py-10">
 
+      <div className="max-w-6xl mx-auto bg-white rounded-3xl shadow-xl p-8">
+
+        <div className="grid md:grid-cols-2 gap-10">
+
+          {/* Ảnh */}
           <div>
-            <h1
+            <img
+              src={product.image}
+              alt={product.name}
               className="
-                text-3xl
-                md:text-5xl
-                font-bold
-                text-sky-700
+                w-full
+                rounded-3xl
+                object-cover
+                shadow-lg
               "
-            >
+            />
+          </div>
+
+          {/* Thông tin */}
+          <div>
+
+            <p className="text-sky-500 font-semibold">
+              {product.category}
+            </p>
+
+            <h1 className="text-4xl font-bold mt-2">
               {product.name}
             </h1>
 
-            <p
-              className="
-                text-red-500
-                text-3xl
-                font-bold
-                mt-5
-              "
-            >
-              {product.price?.toLocaleString()}đ
+            <p className="text-red-500 text-3xl font-bold mt-5">
+              {product.price.toLocaleString()}đ
             </p>
 
-            <p
-              className="
-                mt-6
-                text-gray-600
-              "
-            >
-              {product.description}
-            </p>
+            <div className="mt-6">
+              <h3 className="font-bold text-lg">
+                Mô tả sản phẩm
+              </h3>
 
-            <button
-              onClick={() => {
-                const cart =
-                  JSON.parse(
-                    localStorage.getItem(
-                      "cart"
-                    ) || "[]"
+              <p className="text-gray-600 mt-2">
+                {product.description}
+              </p>
+            </div>
+
+            <div className="flex gap-4 mt-10">
+
+              <button
+                onClick={() => {
+                  const cart = JSON.parse(
+                    localStorage.getItem("cart") || "[]"
                   );
 
-                cart.push({
-                  ...product,
-                  quantity: 1,
-                });
+                  cart.push({
+                    ...product,
+                    quantity: 1,
+                  });
 
-                localStorage.setItem(
-                  "cart",
-                  JSON.stringify(cart)
-                );
+                  localStorage.setItem(
+                    "cart",
+                    JSON.stringify(cart)
+                  );
 
-                alert(
-                  "Đã thêm vào giỏ hàng"
-                );
-              }}
-              className="
-                mt-8
-                bg-sky-500
-                hover:bg-sky-600
-                text-white
-                px-8
-                py-4
-                rounded-2xl
-                font-bold
-              "
-            >
-              Thêm vào giỏ hàng
-            </button>
+                  alert("Đã thêm vào giỏ hàng");
+                }}
+                className="
+                  flex-1
+                  bg-sky-500
+                  hover:bg-sky-600
+                  text-white
+                  py-4
+                  rounded-2xl
+                  font-bold
+                "
+              >
+                🛒 Thêm vào giỏ
+              </button>
+
+              <button
+                className="
+                  flex-1
+                  bg-green-500
+                  hover:bg-green-600
+                  text-white
+                  py-4
+                  rounded-2xl
+                  font-bold
+                "
+              >
+                ⚡ Mua ngay
+              </button>
+
+            </div>
+
           </div>
+
         </div>
+
       </div>
+
     </div>
   );
 }

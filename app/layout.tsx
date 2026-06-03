@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import BackButton from "./components/BackButton";
+import Footer from "./components/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,7 +34,11 @@ export default function RootLayout({
   <Header />
   <BackButton />
 
-  {children}
+ 
+
+{children}
+
+<Footer />
 </body>
     </html>
   );

@@ -27,7 +27,7 @@ useEffect(() => {
   
   {products.map((product) => (
     <Link
-  href={`/product/${product._id}`}
+  href={`/products/${product._id}`}
   key={product._id}
 
       className="
