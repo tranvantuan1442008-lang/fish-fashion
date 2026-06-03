@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-
+import Link from "next/link";
 export default function ProductsPage() {
   const [selectedProduct, setSelectedProduct] = useState("");
 const [showToast, setShowToast] = useState(false);
@@ -26,8 +26,10 @@ useEffect(() => {
 
   
   {products.map((product) => (
-    <div
-      key={product._id}
+    <Link
+  href={`/product/${product._id}`}
+  key={product._id}
+
       className="
   bg-white
   rounded-2xl
@@ -88,8 +90,8 @@ useEffect(() => {
           🛒 Thêm vào giỏ hàng
         </button>
       </div>
-    </div>
-  ))}
+    </Link>
+))}
 </div>
 {showToast && (
   <div className="fixed top-5 right-5 bg-green-500 text-white px-5 py-3 rounded-xl shadow-xl z-50">
