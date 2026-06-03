@@ -7,24 +7,11 @@ export default function Home() {
   const [products, setProducts] = useState<any[]>([]);
 const [showPopup, setShowPopup] = useState(false);
 useEffect(() => {
-  fetch("/api/products")
-    .then((res) => res.json())
-    .then((data) => {
-      setProducts(
-        (data.products || []).slice(0, 4)
-      );
-    });
+  setTimeout(() => {
+    setShowPopup(true);
+  }, 800);
 }, []);
-useEffect(() => {
-  const popupClosed =
-    localStorage.getItem("popupClosed");
 
-  if (!popupClosed) {
-    setTimeout(() => {
-      setShowPopup(true);
-    }, 800);
-  }
-}, []);
   return (
     <>
   {showPopup && (
@@ -34,13 +21,8 @@ useEffect(() => {
 
         <button
           onClick={() => {
-            setShowPopup(false);
-
-            localStorage.setItem(
-              "popupClosed",
-              "true"
-            );
-          }}
+  setShowPopup(false);
+}}
           className="
             absolute
             top-3
@@ -157,39 +139,25 @@ useEffect(() => {
           >
             Thời trang hiện đại dành cho giới trẻ
           </p>
-<div
-  className="
-    mt-5
-    inline-block
-    bg-red-500
-    text-white
-    px-5
-    py-2
-    rounded-full
-    font-bold
-    animate-pulse
-  "
->
-  🔥 SALE UP TO 50%
-</div>
 
-          <Link
-            href="/products"
-            className="
-              inline-block
-              mt-8
-              bg-blue-600
-              hover:bg-blue-700
-              text-white
-              px-8
-              py-4
-              rounded-full
-              font-bold
-              shadow-xl
-            "
-          >
-            Mua ngay
-          </Link>
+
+          <div className="mt-8 flex justify-center">
+  <Link
+    href="/products"
+    className="
+      bg-blue-500
+      hover:bg-blue-600
+      text-white
+      px-10
+      py-4
+      rounded-full
+      font-bold
+      text-lg
+    "
+  >
+    Mua ngay
+  </Link>
+</div>
         </div>
       </section>
 {/* Featured Products */}
