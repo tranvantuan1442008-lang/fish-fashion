@@ -1,8 +1,26 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export default function Header() {
+
+  const [isLogin, setIsLogin] = useState(false);
+const [userEmail, setUserEmail] = useState("");
+
+useEffect(() => {
+  const login =
+    localStorage.getItem("isLogin");
+
+  const email =
+    localStorage.getItem("userEmail");
+
+  if (login === "true") {
+    setIsLogin(true);
+    setUserEmail(email || "");
+  }
+}, []);
+
   return (
     <header className="bg-sky-500 shadow-lg sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4">
@@ -48,23 +66,72 @@ export default function Header() {
           </nav>
 
           {/* Actions */}
-          <div className="flex gap-3">
+<div className="flex gap-3 items-center">
 
-            <Link
-              href="/cart"
-              className="
-                bg-white
-                text-sky-600
-                px-4
-                py-2
-                rounded-xl
-                font-bold
-              "
-            >
-              🛒
-            </Link>
+  <Link
+    href="/cart"
+    className="
+      bg-white
+      text-sky-600
+      px-4
+      py-2
+      rounded-xl
+      font-bold
+    "
+  >
+    🛒
+  </Link>
 
-          </div>
+  {!isLogin ? (
+    <>
+      <Link
+        href="/login"
+        className="text-white font-semibold"
+      >
+        Đăng nhập
+      </Link>
+
+      <Link
+        href="/register"
+        className="
+          bg-white
+          text-sky-600
+          px-4
+          py-2
+          rounded-xl
+          font-bold
+        "
+      >
+        Đăng ký
+      </Link>
+    </>
+  ) : (
+    <>
+      <span className="text-white text-sm">
+        👤 {userEmail}
+      </span>
+
+      <button
+        onClick={() => {
+          localStorage.removeItem("isLogin");
+          localStorage.removeItem("userEmail");
+          window.location.href = "/";
+        }}
+        className="
+          bg-red-500
+          text-white
+          px-4
+          py-2
+          rounded-xl
+          font-bold
+        "
+      >
+        Đăng xuất
+      </button>
+    </>
+  )}
+
+</div>
 
         </div>
 
