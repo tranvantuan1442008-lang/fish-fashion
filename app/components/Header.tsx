@@ -8,6 +8,7 @@ export default function Header() {
   const [isLogin, setIsLogin] = useState(false);
 const [userEmail, setUserEmail] = useState("");
 const [showMenu, setShowMenu] = useState(false);
+const [cartCount, setCartCount] = useState(0);
 useEffect(() => {
   const login =
     localStorage.getItem("isLogin");
@@ -20,7 +21,35 @@ useEffect(() => {
     setUserEmail(email || "");
   }
 }, []);
+useEffect(() => {
+  const updateCart = () => {
+    const cart = JSON.parse(
+      localStorage.getItem("cart") || "[]"
+    );
 
+    const total = cart.reduce(
+      (sum: number, item: any) =>
+        sum + (item.quantity || 1),
+      0
+    );
+
+    setCartCount(total);
+  };
+
+  updateCart();
+
+  window.addEventListener(
+    "cartUpdated",
+    updateCart
+  );
+
+  return () => {
+    window.removeEventListener(
+      "cartUpdated",
+      updateCart
+    );
+  };
+}, []);
   return (
   <>
     <div className="bg-gradient-to-r from-red-500 via-pink-500 to-red-500 text-white overflow-hidden">
@@ -75,6 +104,8 @@ useEffect(() => {
           {/* Actions */}
 <div className="flex gap-3 items-center">
 
+  <div className="relative">
+
   <Link
     href="/cart"
     className="
@@ -88,6 +119,30 @@ useEffect(() => {
   >
     🛒
   </Link>
+
+  {cartCount > 0 && (
+    <span
+      className="
+        absolute
+        -top-2
+        -right-2
+        bg-red-500
+        text-white
+        text-xs
+        w-6
+        h-6
+        rounded-full
+        flex
+        items-center
+        justify-center
+        font-bold
+      "
+    >
+      {cartCount}
+    </span>
+  )}
+
+</div>
 
   {!isLogin ? (
     <>

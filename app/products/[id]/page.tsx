@@ -6,6 +6,8 @@ import { useParams } from "next/navigation";
 export default function ProductDetail() {
   const params = useParams();
   const [product, setProduct] = useState<any>(null);
+const [showToast, setShowToast] =
+  useState(false);
 
   useEffect(() => {
     if (!params?.id) return;
@@ -81,7 +83,15 @@ export default function ProductDetail() {
         JSON.stringify(cart)
       );
 
-      alert("Đã thêm vào giỏ hàng");
+      window.dispatchEvent(
+  new Event("cartUpdated")
+);
+
+setShowToast(true);
+
+setTimeout(() => {
+  setShowToast(false);
+}, 2000);
     }}
     className="
       flex-1
@@ -114,7 +124,27 @@ export default function ProductDetail() {
           </div>
 
         </div>
-      </div>
+
+      {showToast && (
+        <div
+          className="
+            fixed
+            top-5
+            right-5
+            bg-green-500
+            text-white
+            px-5
+            py-3
+            rounded-xl
+            shadow-xl
+            z-50
+          "
+        >
+          ✅ Đã thêm vào giỏ hàng
+        </div>
+      )}
+
     </div>
-  );
+  </div>
+);
 }
