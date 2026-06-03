@@ -6,12 +6,17 @@ import { useEffect, useState } from "react";
 export default function Home() {
   const [products, setProducts] = useState<any[]>([]);
 const [showPopup, setShowPopup] = useState(false);
-useEffect(() => {
-  setTimeout(() => {
-    setShowPopup(true);
-  }, 800);
-}, []);
 
+useEffect(() => {
+  const popupShown =
+    sessionStorage.getItem("popupShown");
+
+  if (!popupShown) {
+    setTimeout(() => {
+      setShowPopup(true);
+    }, 800);
+  }
+}, []);
   return (
     <>
   {showPopup && (
@@ -22,6 +27,11 @@ useEffect(() => {
         <button
           onClick={() => {
   setShowPopup(false);
+
+  sessionStorage.setItem(
+    "popupShown",
+    "true"
+  );
 }}
           className="
             absolute
@@ -63,26 +73,25 @@ useEffect(() => {
           <p>🎁 Mua 2 tặng 1</p>
 
           <button
-            onClick={() => {
-              setShowPopup(false);
+  onClick={() => {
+    sessionStorage.setItem(
+      "popupShown",
+      "true"
+    );
 
-              localStorage.setItem(
-                "popupClosed",
-                "true"
-              );
-            }}
-            className="
-              mt-6
-              bg-sky-500
-              text-white
-              px-8
-              py-3
-              rounded-full
-              font-bold
-            "
-          >
-            Mua ngay
-          </button>
+    setShowPopup(false);
+  }}
+  className="
+    bg-sky-500
+    text-white
+    px-8
+    py-3
+    rounded-full
+    font-bold
+  "
+>
+  Mua ngay
+</button>
 
         </div>
 
