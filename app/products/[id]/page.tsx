@@ -1,23 +1,27 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
 
-export default function ProductDetail({
-  params,
-}: {
-  params: { id: string };
-}) {
+export default function ProductDetail() {
+
+  const params = useParams();
   const [product, setProduct] = useState<any>(null);
 
   useEffect(() => {
     fetch("/api/products")
       .then((res) => res.json())
       .then((data) => {
-        const found = data.products.find(
-          (p: any) => p._id === params.id
-        );
+        console.log("ID URL:", params.id);
+console.log("Products:", data.products);
 
-        setProduct(found);
+const found = data.products.find(
+  (p: any) => String(p._id) === String(params.id)
+);
+
+console.log("Found:", found);
+
+setProduct(found);
       });
   }, [params.id]);
 
