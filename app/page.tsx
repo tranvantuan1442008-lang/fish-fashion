@@ -1,52 +1,236 @@
 "use client";
+
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export default function Home() {
-  return (
-    <main className="min-h-screen bg-white">
+  const [products, setProducts] = useState<any[]>([]);
 
+useEffect(() => {
+  fetch("/api/products")
+    .then((res) => res.json())
+    .then((data) => {
+      setProducts(
+        (data.products || []).slice(0, 4)
+      );
+    });
+}, []);
+  return (
+    <main className="bg-white">
+
+      {/* Hero */}
       <section
-  className="
-    min-h-[500px]
-    md:h-[650px]
-    bg-cover
-    bg-center
-    flex
-    items-center
-    justify-center
-    px-4
-  "
-  style={{
-    backgroundImage: "url('/fish-banner.png')",
-  }}
->
-        <div className="text-center">
-          <h1 className="text-4xl md:text-6xl font-bold text-blue-700">
+        className="
+          relative
+          h-[85vh]
+          flex
+          items-center
+          justify-center
+          bg-cover
+          bg-center
+        "
+        style={{
+          backgroundImage:
+            "url('/fish-banner.png')",
+        }}
+      >
+        <div
+          className="
+            absolute
+            inset-0
+            bg-black/40
+          "
+        />
+
+        <div className="relative z-10 text-center px-6">
+          <h1
+            className="
+              text-5xl
+              md:text-7xl
+              font-extrabold
+              text-white
+            "
+          >
             FISH FASHION
           </h1>
 
-          <p className="mt-4 text-lg md:text-xl text-gray-700">
-            Thời trang nam và nữ hiện đại
+          <p
+            className="
+              text-white
+              text-lg
+              md:text-2xl
+              mt-5
+            "
+          >
+            Thời trang hiện đại dành cho giới trẻ
           </p>
 
           <Link
-  href="/products"
-  className="
-  mt-8
-  inline-block
-  bg-blue-600
-  text-white
-  px-6
-  md:px-8
-  py-3
-  md:py-4
-  rounded-full
-  text-base
-  md:text-xl
-"
->
-  Mua ngay
-</Link>
+            href="/products"
+            className="
+              inline-block
+              mt-8
+              bg-blue-600
+              hover:bg-blue-700
+              text-white
+              px-8
+              py-4
+              rounded-full
+              font-bold
+              shadow-xl
+            "
+          >
+            Mua ngay
+          </Link>
+        </div>
+      </section>
+{/* Featured Products */}
+<section className="max-w-7xl mx-auto py-20 px-6">
+
+  <h2 className="text-4xl font-bold text-center mb-12">
+    🔥 Sản phẩm nổi bật
+  </h2>
+
+  <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+
+    {products.map((product) => (
+      <div
+        key={product._id}
+        className="
+          bg-white
+          rounded-3xl
+          shadow-md
+          hover:shadow-xl
+          transition
+          overflow-hidden
+        "
+      >
+        <img
+          src={product.image}
+          alt={product.name}
+          className="
+            w-full
+            h-64
+            object-cover
+          "
+        />
+
+        <div className="p-4">
+
+          <h3 className="font-bold">
+            {product.name}
+          </h3>
+
+          <p className="text-red-500 font-bold mt-2">
+            {product.price?.toLocaleString()}đ
+          </p>
+
+        </div>
+      </div>
+    ))}
+
+  </div>
+
+  <div className="text-center mt-10">
+    <Link
+      href="/products"
+      className="
+        bg-blue-600
+        text-white
+        px-8
+        py-3
+        rounded-full
+        font-bold
+      "
+    >
+      Xem tất cả sản phẩm
+    </Link>
+  </div>
+
+</section>
+      {/* Categories */}
+      <section className="max-w-7xl mx-auto py-20 px-6">
+
+        <h2 className="text-4xl font-bold text-center mb-12">
+          Danh mục nổi bật
+        </h2>
+
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+
+          <div className="bg-gray-100 p-8 rounded-3xl text-center">
+            👕
+            <h3 className="mt-3 font-bold">
+              Áo Nam
+            </h3>
+          </div>
+
+          <div className="bg-gray-100 p-8 rounded-3xl text-center">
+            👖
+            <h3 className="mt-3 font-bold">
+              Quần Nam
+            </h3>
+          </div>
+
+          <div className="bg-gray-100 p-8 rounded-3xl text-center">
+            👗
+            <h3 className="mt-3 font-bold">
+              Thời Trang Nữ
+            </h3>
+          </div>
+
+          <div className="bg-gray-100 p-8 rounded-3xl text-center">
+            👜
+            <h3 className="mt-3 font-bold">
+              Phụ Kiện
+            </h3>
+          </div>
+
+        </div>
+      </section>
+
+      {/* Features */}
+      <section className="bg-gray-50 py-20">
+
+        <div className="max-w-6xl mx-auto px-6">
+
+          <h2 className="text-4xl font-bold text-center mb-12">
+            Tại sao chọn Fish Fashion?
+          </h2>
+
+          <div className="grid md:grid-cols-3 gap-8">
+
+            <div className="bg-white p-8 rounded-3xl shadow">
+              <h3 className="font-bold text-xl">
+                🚚 Giao hàng nhanh
+              </h3>
+
+              <p className="mt-3 text-gray-600">
+                Ship toàn quốc, hỗ trợ kiểm tra hàng.
+              </p>
+            </div>
+
+            <div className="bg-white p-8 rounded-3xl shadow">
+              <h3 className="font-bold text-xl">
+                💎 Chất lượng cao
+              </h3>
+
+              <p className="mt-3 text-gray-600">
+                Cam kết đúng hình ảnh và mô tả.
+              </p>
+            </div>
+
+            <div className="bg-white p-8 rounded-3xl shadow">
+              <h3 className="font-bold text-xl">
+                🔄 Đổi trả dễ dàng
+              </h3>
+
+              <p className="mt-3 text-gray-600">
+                Hỗ trợ đổi trả khi có lỗi sản phẩm.
+              </p>
+            </div>
+
+          </div>
+
         </div>
       </section>
 
