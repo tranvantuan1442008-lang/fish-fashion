@@ -11,21 +11,23 @@ export async function POST(req: Request) {
   try {
     const body = await req.json();
 
-    const result =
-      await cloudinary.uploader.upload(
-        body.image
-      );
+    const result = await cloudinary.uploader.upload(
+      body.image
+    );
 
     return NextResponse.json({
       success: true,
       url: result.secure_url,
     });
-  } catch (error) {
-    console.log(error);
+  } catch (error: any) {
+    console.error("UPLOAD ERROR:", error);
 
-    return NextResponse.json({
-      success: false,
-      error,
-    });
+    return NextResponse.json(
+      {
+        success: false,
+        error: error.message,
+      },
+      { status: 500 }
+    );
   }
 }

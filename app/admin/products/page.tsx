@@ -50,8 +50,9 @@ const uploadImage = async (
 
     const data = await res.json();
 
-    setImage(data.url);
+console.log(data);
 
+setImage(data.url);
     setUploading(false);
   };
 };
