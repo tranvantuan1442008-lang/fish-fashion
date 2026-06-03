@@ -38,9 +38,15 @@ if (!addressDetail.trim()) {
   alert("⚠️ Vui lòng nhập số nhà / thôn / xóm");
   return;
 }
-  const cart = JSON.parse(
-    localStorage.getItem("cart") || "[]"
-  );
+  const buyNowProduct = JSON.parse(
+  localStorage.getItem("buyNowProduct") || "null"
+);
+
+const cart = buyNowProduct
+  ? [buyNowProduct]
+  : JSON.parse(
+      localStorage.getItem("cart") || "[]"
+    );
 
   const total = cart.reduce(
     (sum: number, item: any) =>
@@ -78,6 +84,7 @@ console.log(data);
   if (data.success) {
 
   localStorage.removeItem("cart");
+localStorage.removeItem("buyNowProduct");
 
   window.dispatchEvent(
     new Event("cartUpdated")
