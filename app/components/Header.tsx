@@ -22,6 +22,13 @@ useEffect(() => {
 }, []);
 
   return (
+  <>
+    <div className="bg-gradient-to-r from-red-500 via-pink-500 to-red-500 text-white overflow-hidden">
+      <div className="animate-marquee whitespace-nowrap py-2 font-bold text-sm md:text-base">
+        🔥 SALE UP TO 30% • 🚚 FREESHIP TOÀN QUỐC • 🎁 MUA 2 TẶNG 1 • 💎 HÀNG CHÍNH HÃNG • ⭐ ĐỔI TRẢ 7 NGÀY
+      </div>
+    </div>
+
     <header className="bg-sky-500 shadow-lg sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4">
 
@@ -196,5 +203,6 @@ useEffect(() => {
 
       </div>
     </header>
-  );
+</>
+);
 }
