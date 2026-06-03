@@ -35,9 +35,9 @@ export async function POST(req: Request) {
 export async function DELETE(req: Request) {
   await connectDB();
 
-  const { id } = await req.json();
+  const body = await req.json();
 
-  await Product.findByIdAndDelete(id);
+  await Product.findByIdAndDelete(body.id);
 
   return NextResponse.json({
     success: true,
