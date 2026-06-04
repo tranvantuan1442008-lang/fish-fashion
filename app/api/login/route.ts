@@ -24,9 +24,13 @@ export async function POST(req: Request) {
     }
 
     return NextResponse.json({
-      success: true,
-      message: "Đăng nhập thành công",
-    });
+  success: true,
+  message: "Đăng nhập thành công",
+  user: {
+    name: user.name,
+    email: user.email,
+  },
+});
   } catch (error) {
     console.log(error);
 
