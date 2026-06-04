@@ -8,10 +8,9 @@ export async function connectDB() {
     console.log("DNS =", dns.getServers());
     console.log("URI =", process.env.MONGODB_URI);
 
-    if (mongoose.connections[0].readyState) {
-      return;
-    }
-
+    if (mongoose.connection.readyState === 1) {
+  return;
+}
     await mongoose.connect(process.env.MONGODB_URI as string, {
       family: 4,
     });

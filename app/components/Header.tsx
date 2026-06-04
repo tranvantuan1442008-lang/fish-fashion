@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
   useEffect,
   useState,
@@ -8,6 +9,7 @@ import {
 } from "react";
 
 export default function Header() {
+  const router = useRouter();
 
   const [isLogin, setIsLogin] = useState(false);
 const [userEmail, setUserEmail] = useState("");
@@ -254,10 +256,11 @@ useEffect(() => {
      
       <button
         onClick={() => {
-          localStorage.removeItem("isLogin");
-          localStorage.removeItem("userEmail");
-          window.location.href = "/";
-        }}
+  localStorage.removeItem("isLogin");
+  localStorage.removeItem("userEmail");
+
+  router.push("/");
+}}
         className="
           w-full
           text-left
