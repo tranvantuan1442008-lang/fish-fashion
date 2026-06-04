@@ -1,13 +1,19 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import {
+  useEffect,
+  useState,
+  useRef,
+} from "react";
 
 export default function Header() {
 
   const [isLogin, setIsLogin] = useState(false);
 const [userEmail, setUserEmail] = useState("");
 const [showMenu, setShowMenu] = useState(false);
+const menuRef =
+  useRef<HTMLDivElement>(null);
 const [cartCount, setCartCount] = useState(0);
 useEffect(() => {
   const login =
@@ -47,6 +53,32 @@ useEffect(() => {
     window.removeEventListener(
       "cartUpdated",
       updateCart
+    );
+  };
+}, []);
+useEffect(() => {
+  const handleClickOutside = (
+    event: MouseEvent
+  ) => {
+    if (
+      menuRef.current &&
+      !menuRef.current.contains(
+        event.target as Node
+      )
+    ) {
+      setShowMenu(false);
+    }
+  };
+
+  document.addEventListener(
+    "mousedown",
+    handleClickOutside
+  );
+
+  return () => {
+    document.removeEventListener(
+      "mousedown",
+      handleClickOutside
     );
   };
 }, []);
@@ -168,7 +200,10 @@ useEffect(() => {
       </Link>
     </>
   ) : (
-    <div className="relative">
+   <div
+  className="relative"
+  ref={menuRef}
+>
 
   <button
     onClick={() =>

@@ -88,59 +88,9 @@ useEffect(() => {
           }}
           className="w-full mt-3 bg-sky-500 text-white py-2 rounded-lg"
         >
-          🛒 Thêm vào giỏ hàng
+          👀 xem chi tiết sản phẩm 
         </button>
-        <button
-  onClick={(e) => {
-    e.preventDefault();
-
-    localStorage.setItem(
-      "buyNowProduct",
-      JSON.stringify({
-        ...product,
-        quantity: 1,
-      })
-    );
-
-    window.location.href = "/checkout";
-  }}
-  className="
-    w-full
-    mt-3
-    bg-green-500
-    text-white
-    py-2
-    rounded-lg
-    font-bold
-  "
->
-  ⚡ Mua ngay
-</button><button
-  onClick={(e) => {
-    e.preventDefault();
-
-    localStorage.setItem(
-      "buyNowProduct",
-      JSON.stringify({
-        ...product,
-        quantity: 1,
-      })
-    );
-
-    window.location.href = "/checkout";
-  }}
-  className="
-    w-full
-    mt-3
-    bg-green-500
-    text-white
-    py-2
-    rounded-lg
-    font-bold
-  "
->
-  ⚡ Mua ngay
-</button>
+        
       </div>
     </Link>
 ))}
