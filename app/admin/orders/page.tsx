@@ -89,7 +89,7 @@ if (!isAdmin) {
 >
   📌 {order.status || "Chờ xác nhận"}
 </p>
-<div className="flex gap-2 mt-3">
+<div className="flex flex-wrap gap-2 mt-3">
 
   <button
     onClick={async () => {
@@ -100,21 +100,15 @@ if (!isAdmin) {
         },
         body: JSON.stringify({
           id: order._id,
-          status: "Đang giao",
+          status: "🟡 Chờ xác nhận",
         }),
       });
 
       location.reload();
     }}
-    className="
-      bg-blue-500
-      text-white
-      px-3
-      py-1
-      rounded
-    "
+    className="bg-yellow-500 text-white px-3 py-1 rounded"
   >
-    🚚 Đang giao
+    🟡 Chờ xác nhận
   </button>
 
   <button
@@ -126,19 +120,73 @@ if (!isAdmin) {
         },
         body: JSON.stringify({
           id: order._id,
-          status: "Hoàn thành",
+          status: "📦 Đang chuẩn bị hàng",
         }),
       });
 
       location.reload();
     }}
-    className="
-      bg-green-500
-      text-white
-      px-3
-      py-1
-      rounded
-    "
+    className="bg-orange-500 text-white px-3 py-1 rounded"
+  >
+    📦 Chuẩn bị
+  </button>
+
+  <button
+    onClick={async () => {
+      await fetch("/api/order", {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: order._id,
+          status: "🚚 Đang vận chuyển",
+        }),
+      });
+
+      location.reload();
+    }}
+    className="bg-blue-500 text-white px-3 py-1 rounded"
+  >
+    🚚 Vận chuyển
+  </button>
+
+  <button
+    onClick={async () => {
+      await fetch("/api/order", {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: order._id,
+          status: "📬 Đang giao hàng",
+        }),
+      });
+
+      location.reload();
+    }}
+    className="bg-cyan-500 text-white px-3 py-1 rounded"
+  >
+    📬 Đang giao
+  </button>
+
+  <button
+    onClick={async () => {
+      await fetch("/api/order", {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: order._id,
+          status: "✅ Đã giao thành công",
+        }),
+      });
+
+      location.reload();
+    }}
+    className="bg-green-500 text-white px-3 py-1 rounded"
   >
     ✅ Hoàn thành
   </button>
@@ -152,22 +200,18 @@ if (!isAdmin) {
         },
         body: JSON.stringify({
           id: order._id,
-          status: "Đã hủy",
+          status: "❌ Đã hủy",
         }),
       });
 
       location.reload();
     }}
-    className="
-      bg-red-500
-      text-white
-      px-3
-      py-1
-      rounded
-    "
+    className="bg-red-500 text-white px-3 py-1 rounded"
   >
     ❌ Hủy
   </button>
+
+
 
 </div>
 <div className="mt-3">
