@@ -58,38 +58,20 @@ useEffect(() => {
           {product.category}
         </p>
 
-        <button
-  onClick={(e) => {
-    e.preventDefault();
-            const cart = JSON.parse(
-              localStorage.getItem("cart") || "[]"
-            );
-
-            cart.push({
-              ...product,
-              quantity: 1,
-            });
-
-            localStorage.setItem(
-              "cart",
-              JSON.stringify(cart)
-            );
-
-            window.dispatchEvent(
-              new Event("cartUpdated")
-            );
-
-            setMessage("🛒 Đã thêm vào giỏ hàng");
-            setShowToast(true);
-
-            setTimeout(() => {
-              setShowToast(false);
-            }, 2000);
-          }}
-          className="w-full mt-3 bg-sky-500 text-white py-2 rounded-lg"
-        >
-          👀 xem chi tiết sản phẩm 
-        </button>
+        <div
+  className="
+    w-full
+    mt-3
+    bg-sky-500
+    text-white
+    py-2
+    rounded-lg
+    text-center
+    font-bold
+  "
+>
+  👀 Xem chi tiết sản phẩm
+</div>
         
       </div>
     </Link>
