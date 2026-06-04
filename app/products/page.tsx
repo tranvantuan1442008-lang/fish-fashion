@@ -59,7 +59,8 @@ useEffect(() => {
         </p>
 
         <button
-          onClick={() => {
+  onClick={(e) => {
+    e.preventDefault();
             const cart = JSON.parse(
               localStorage.getItem("cart") || "[]"
             );
@@ -89,6 +90,57 @@ useEffect(() => {
         >
           🛒 Thêm vào giỏ hàng
         </button>
+        <button
+  onClick={(e) => {
+    e.preventDefault();
+
+    localStorage.setItem(
+      "buyNowProduct",
+      JSON.stringify({
+        ...product,
+        quantity: 1,
+      })
+    );
+
+    window.location.href = "/checkout";
+  }}
+  className="
+    w-full
+    mt-3
+    bg-green-500
+    text-white
+    py-2
+    rounded-lg
+    font-bold
+  "
+>
+  ⚡ Mua ngay
+</button><button
+  onClick={(e) => {
+    e.preventDefault();
+
+    localStorage.setItem(
+      "buyNowProduct",
+      JSON.stringify({
+        ...product,
+        quantity: 1,
+      })
+    );
+
+    window.location.href = "/checkout";
+  }}
+  className="
+    w-full
+    mt-3
+    bg-green-500
+    text-white
+    py-2
+    rounded-lg
+    font-bold
+  "
+>
+  ⚡ Mua ngay
+</button>
       </div>
     </Link>
 ))}
