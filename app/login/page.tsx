@@ -86,12 +86,19 @@ shadow-lg
                 });
 
                 const data = await res.json();
-
+console.log(data);
                 setMessage(data.message);
 
                 if (data.success) {
   localStorage.setItem("isLogin", "true");
-  localStorage.setItem("userEmail", email);
+localStorage.setItem("userEmail", email);
+
+if (data.user?.name) {
+  localStorage.setItem(
+    "userName",
+    data.user.name
+  );
+}
 
   window.location.href = "/";
 }
