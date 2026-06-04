@@ -3,12 +3,15 @@ import mongoose from "mongoose";
 const OrderSchema = new mongoose.Schema(
   {
     name: String,
+    email: String, // thêm dòng này
     phone: String,
     address: String,
-status: {
-  type: String,
-  default: "Chờ xác nhận",
-},
+
+    status: {
+      type: String,
+      default: "Chờ xác nhận",
+    },
+
     products: [
       {
         name: String,
@@ -28,7 +31,4 @@ status: {
 
 export default
   mongoose.models.Order ||
-  mongoose.model(
-    "Order",
-    OrderSchema
-  );
+  mongoose.model("Order", OrderSchema);
