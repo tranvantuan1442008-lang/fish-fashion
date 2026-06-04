@@ -255,23 +255,27 @@ useEffect(() => {
 
      
       <button
-        onClick={() => {
-  localStorage.removeItem("isLogin");
-  localStorage.removeItem("userEmail");
+  onClick={() => {
+    localStorage.removeItem("isLogin");
+    localStorage.removeItem("userEmail");
+    localStorage.removeItem("userName");
 
-  router.push("/");
-}}
-        className="
-          w-full
-          text-left
-          px-4
-          py-3
-          text-red-500
-          hover:bg-red-50
-        "
-      >
-        🚪 Đăng xuất
-      </button>
+    setIsLogin(false);
+    setShowMenu(false);
+
+    window.location.reload();
+  }}
+  className="
+    w-full
+    text-left
+    px-4
+    py-3
+    text-red-500
+    hover:bg-red-50
+  "
+>
+  🚪 Đăng xuất
+</button>
 
     </div>
   )}
