@@ -236,8 +236,8 @@ useEffect(() => {
       "
     >
       <div className="p-3 border-b text-sm">
-        {userEmail}
-      </div>
+  {localStorage.getItem("userName")}
+</div>
 
       <Link
         href="/profile"
@@ -251,18 +251,7 @@ useEffect(() => {
         👤 Tài khoản
       </Link>
 
-      <Link
-        href="/orders"
-        className="
-          block
-          px-4
-          py-3
-          hover:bg-sky-50
-        "
-      >
-        📦 Đơn hàng
-      </Link>
-
+     
       <button
         onClick={() => {
           localStorage.removeItem("isLogin");
