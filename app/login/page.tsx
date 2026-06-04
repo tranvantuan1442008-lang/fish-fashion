@@ -98,6 +98,10 @@ if (data.user?.name) {
     "userName",
     data.user.name
   );
+  localStorage.setItem(
+  "userPhone",
+  data.user.phone
+);
 }
 
   window.location.href = "/";

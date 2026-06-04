@@ -16,6 +16,28 @@ export default function ProfilePage() {
           <p className="mt-3 text-gray-600">
             Chào mừng bạn đến với Fish Fashion
           </p>
+          <div className="mt-5 border-t pt-4 space-y-2">
+  <p>
+    <strong>👤 Họ tên:</strong>{" "}
+    {typeof window !== "undefined"
+      ? localStorage.getItem("userName")
+      : ""}
+  </p>
+
+  <p>
+    <strong>📧 Email:</strong>{" "}
+    {typeof window !== "undefined"
+      ? localStorage.getItem("userEmail")
+      : ""}
+  </p>
+
+  <p>
+    <strong>📱 Số điện thoại:</strong>{" "}
+    {typeof window !== "undefined"
+      ? localStorage.getItem("userPhone")
+      : ""}
+  </p>
+</div>
         </div>
 
         <div className="space-y-4">
