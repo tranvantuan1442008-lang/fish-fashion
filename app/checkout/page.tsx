@@ -64,6 +64,8 @@ const cart = buyNowProduct
       body: JSON.stringify({
   name,
   phone,
+  email: localStorage.getItem("userEmail"),
+
   address:
     addressDetail +
     ", " +
@@ -72,6 +74,7 @@ const cart = buyNowProduct
     district +
     ", " +
     province,
+
   products: cart,
   total,
 }),
