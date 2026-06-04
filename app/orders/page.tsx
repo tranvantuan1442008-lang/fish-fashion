@@ -69,10 +69,23 @@ setOrders(myOrders);
                   💰 {order.total?.toLocaleString()}đ
                 </p>
 
-                <p className="mt-2 font-semibold text-orange-500">
-                  {order.status ||
-                    "🟡 Chờ xác nhận"}
-                </p>
+                <p
+  className={`
+    mt-2
+    font-bold
+    ${
+      order.status === "🚚 Đang vận chuyển"
+        ? "text-blue-500"
+        : order.status === "✅ Hoàn thành"
+        ? "text-green-500"
+        : order.status === "❌ Đã hủy"
+        ? "text-red-500"
+        : "text-orange-500"
+    }
+  `}
+>
+  {order.status || "🟡 Chờ xác nhận"}
+</p>
               </div>
             ))}
 
