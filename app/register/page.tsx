@@ -94,12 +94,18 @@ const [confirmPassword, setConfirmPassword] = useState("");
 
   const data = await res.json();
 
-  setSuccess(data.success);
-  setMessage(data.message);
+setSuccess(data.success);
+setMessage(data.message);
 
+if (data.success) {
   setTimeout(() => {
-    setMessage("");
-  }, 2000);
+    window.location.href = "/login";
+  }, 1500);
+}
+
+setTimeout(() => {
+  setMessage("");
+}, 2000);
 }}
   className="w-full bg-sky-600 text-white py-3 rounded-lg"
 >
